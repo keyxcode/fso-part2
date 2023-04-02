@@ -13,10 +13,19 @@ const App = () => {
     setNewName(event.target.value);
   };
 
+  const addName = (event) => {
+    event.preventDefault();
+
+    const personObject = {
+      name: newName,
+    };
+    setPersons(persons.concat(personObject));
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
+      <form onSubmit={addName}>
         <div>
           name: <input value={newName} onChange={handleNewNameChange} />
         </div>
