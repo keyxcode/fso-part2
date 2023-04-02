@@ -13,13 +13,25 @@ const App = () => {
     setNewName(event.target.value);
   };
 
+  const personExists = (person) => {
+    const personsStringify = persons.map((person) => JSON.stringify(person));
+    console.log(personsStringify);
+    return personsStringify.includes(JSON.stringify(person));
+  };
+
   const addName = (event) => {
     event.preventDefault();
 
     const personObject = {
       name: newName,
     };
+    if (personExists(personObject)) {
+      alert(`${newName} is already added to the phonebook`);
+      return;
+    }
+
     setPersons(persons.concat(personObject));
+    setNewName("");
   };
 
   return (
@@ -37,7 +49,6 @@ const App = () => {
       {persons.map((person) => (
         <Contact key={person.name} person={person} />
       ))}
-      <div>debug: {newName}</div>
     </div>
   );
 };
