@@ -25,6 +25,9 @@ const App = () => {
     setNewNumber(event.target.value);
   };
 
+  const personsToShow = newFilter
+    ? persons.filter((person) => person.name.includes(newFilter))
+    : [...persons];
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value);
   };
@@ -70,7 +73,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map((person) => (
+      {personsToShow.map((person) => (
         <Contact key={person.name} person={person} />
       ))}
     </div>
