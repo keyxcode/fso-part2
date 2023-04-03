@@ -47,7 +47,8 @@ const App = () => {
       number: newNumber,
     };
     if (personExists(personObject)) {
-      alert(`${newName} is already added to the phonebook`);
+      window.confirm(`${newName} is already added to the phonebook`);
+      personsService.update(personObject);
       return;
     }
 
