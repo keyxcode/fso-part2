@@ -98,10 +98,16 @@ const App = () => {
       return;
     }
 
-    setPersons(persons.concat(personObject));
-    setNewName("");
-    setNewNumber("");
-    setNewFilter("");
+    axios
+      .post("http://localhost:3001/pesons", personObject)
+      .then((response) => {
+        const newPerson = response.data;
+        setPersons(persons.concat(newPerson));
+        setNewName("");
+        setNewNumber("");
+        setNewFilter("");
+      })
+      .catch((response) => console.log(response.code));
   };
 
   return (
