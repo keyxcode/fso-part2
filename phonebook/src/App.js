@@ -61,8 +61,14 @@ const App = () => {
   };
 
   const deletePerson = (id) => {
-    personsService.deletePerson(id);
-    setPersons(persons.filter((person) => person.id !== id));
+    if (
+      window.confirm(
+        `Delete ${persons.filter((person) => person.id === id)[0].name}`
+      )
+    ) {
+      personsService.deletePerson(id);
+      setPersons(persons.filter((person) => person.id !== id));
+    }
   };
 
   return (
