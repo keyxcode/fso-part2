@@ -39,6 +39,14 @@ const App = () => {
     return personsNames.includes(JSON.stringify(person.name));
   };
 
+  const getNameFromID = (id) => {
+    return persons.filter((person) => person.id === id)[0].name;
+  };
+
+  const getIDFromName = (name) => {
+    return persons.filter((person) => person.name === name)[0].id;
+  };
+
   const addPerson = (event) => {
     event.preventDefault();
 
@@ -47,8 +55,22 @@ const App = () => {
       number: newNumber,
     };
     if (personExists(personObject)) {
-      window.confirm(`${newName} is already added to the phonebook`);
-      personsService.update(personObject);
+      if (
+        window.confirm(
+          `${newName} is already added to the phonebook, return old number with a new one?`
+        )
+      ) {
+        const id = getIDFromName(newName);
+        personsService
+          .update(id, personObject)
+          .then((returnedPerson) =>
+            setPersons(
+              persons.map((person) =>
+                person.id !== id ? person : returnedPerson
+              )
+            )
+          );
+      }
       return;
     }
 
@@ -61,11 +83,7 @@ const App = () => {
   };
 
   const deletePerson = (id) => {
-    if (
-      window.confirm(
-        `Delete ${persons.filter((person) => person.id === id)[0].name}`
-      )
-    ) {
+    if (window.confirm(`Delete ${getNameFromID(id)}`)) {
       personsService.deletePerson(id);
       setPersons(persons.filter((person) => person.id !== id));
     }
