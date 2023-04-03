@@ -1,4 +1,4 @@
-const Filter = ({ newFilter, handleFilterChange }) => {
+const PersonFilter = ({ newFilter, handleFilterChange }) => {
   return (
     <div>
       filter shown with
@@ -7,4 +7,4 @@ const Filter = ({ newFilter, handleFilterChange }) => {
   );
 };
 
-export default Filter;
+export default PersonFilter;

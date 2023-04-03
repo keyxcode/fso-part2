@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Filter from "./components/Filter";
+import PersonFilter from "./components/PersonFilter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 import personsService from "./services/persons";
@@ -62,7 +62,10 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
+      <PersonFilter
+        newFilter={newFilter}
+        handleFilterChange={handleFilterChange}
+      />
       <h3>Add a new</h3>
       <PersonForm
         addPerson={addPerson}
