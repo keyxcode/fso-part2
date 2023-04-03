@@ -59,6 +59,10 @@ const App = () => {
     });
   };
 
+  const deletePerson = (id) => {
+    personsService.deletePerson(id);
+  };
+
   return (
     <div>
       <h2>Phonebook</h2>
@@ -75,7 +79,7 @@ const App = () => {
         handleNewNumberChange={handleNewNumberChange}
       />
       <h3>Numbers</h3>
-      <Persons persons={personsToShow} />
+      <Persons persons={personsToShow} deletePerson={deletePerson} />
     </div>
   );
 };
