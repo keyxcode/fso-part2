@@ -18,8 +18,9 @@ function App() {
     const updatedSearch = e.target.value;
     setNewSearch(updatedSearch);
 
-    if (updatedSearch === "") setCountriesToShow([]);
-    else {
+    if (updatedSearch === "") {
+      setCountriesToShow([]);
+    } else {
       setCountriesToShow(
         countries.filter((country) =>
           country["name"]["common"]
@@ -30,14 +31,11 @@ function App() {
     }
   };
 
-  const handleShowCountry = (e) => {
-    const buttonCountryName = e.target.name;
-
+  const handleShowCountry = (e, countryName) => {
     setCountriesToShow(
       countries.filter(
         (country) =>
-          country["name"]["common"].toLowerCase() ===
-          buttonCountryName.toLowerCase()
+          country["name"]["common"].toLowerCase() === countryName.toLowerCase()
       )
     );
   };

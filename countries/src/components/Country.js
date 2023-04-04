@@ -1,3 +1,5 @@
+import Weather from "./Weather";
+
 const Country = ({ country }) => {
   const languages = [];
   for (const language in country["languages"])
@@ -15,6 +17,7 @@ const Country = ({ country }) => {
         ))}
       </ul>
       <img alt="flag" src={country["flags"]["png"]} />
+      <Weather country={country} />
     </div>
   );
 };
