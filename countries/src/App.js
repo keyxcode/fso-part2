@@ -6,6 +6,16 @@ function App() {
   const [newSearch, setNewSearch] = useState("");
   const [countries, setCountries] = useState([]);
 
+  const getNamesFromCountries = (countries) => {
+    return countries.map((country) => country["name"]["common"]);
+  };
+
+  let countriesToShow = newSearch
+    ? getNamesFromCountries(countries).filter((name) =>
+        name.toLowerCase().includes(newSearch.toLowerCase())
+      )
+    : getNamesFromCountries(countries);
+
   useEffect(() => {
     countriesService
       .getAll()
@@ -20,6 +30,7 @@ function App() {
     <div>
       <h1>Countries</h1>
       <Search newSearch={newSearch} handleNewSearch={handleNewSearch} />
+      <div>{countriesToShow}</div>
     </div>
   );
 }
