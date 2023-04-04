@@ -3,7 +3,6 @@ import axios from "axios";
 
 const Weather = ({ country }) => {
   const [weather, setWeather] = useState(null);
-  const [weatherIconLink, setWeatherIconLink] = useState(null);
 
   const capital = country["capital"][0];
 
@@ -14,9 +13,6 @@ const Weather = ({ country }) => {
       )
       .then((res) => {
         setWeather(res.data);
-        setWeatherIconLink(
-          `https://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
-        );
       });
   }, []);
 
@@ -24,7 +20,14 @@ const Weather = ({ country }) => {
     <div>
       <h2>Weather in {capital}</h2>
       <div>{weather ? `Temprature: ${weather.main.temp} Celcius` : ""}</div>
-      <img alt="weather-icon" src={weatherIconLink ? weatherIconLink : ""} />
+      <img
+        alt={`${capital} weather-icon`}
+        src={
+          weather
+            ? `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+            : ""
+        }
+      />
       <div>{weather ? `Wind: ${weather.wind.speed} m/s` : ""}</div>
     </div>
   );
