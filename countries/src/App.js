@@ -25,11 +25,18 @@ function App() {
     setNewSearch(e.target.value);
   };
 
+  const handleShowCountry = () => {
+    console.log("hi");
+  };
+
   return (
     <div>
       <h1>Countries</h1>
       <Search newSearch={newSearch} handleNewSearch={handleNewSearch} />
-      <Results countriesToShow={countriesToShow} />
+      <Results
+        countriesToShow={countriesToShow}
+        handleShowCountry={handleShowCountry}
+      />
     </div>
   );
 }
