@@ -10,7 +10,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
-  const [noti, setNoti] = useState(null);
+  const [notiMsg, setNotiMsg] = useState(null);
+  const [notiIsError, setNotiIsError] = useState(false);
 
   useEffect(() => {
     personsService
@@ -75,11 +76,12 @@ const App = () => {
           )
           .catch((err) => {
             console.log(err);
-            setNoti(
+            setNotiIsError(true);
+            setNotiMsg(
               `Information of ${personObject.name} has already been removed from server`
             );
             setTimeout(() => {
-              setNoti(null);
+              setNotiMsg(null);
             }, 5000);
           });
       }
@@ -91,9 +93,9 @@ const App = () => {
       setNewName("");
       setNewNumber("");
       setNewFilter("");
-      setNoti(`Added ${personObject.name}`);
+      setNotiMsg(`Added ${personObject.name}`);
       setTimeout(() => {
-        setNoti(null);
+        setNotiMsg(null);
       }, 5000);
     });
   };
@@ -108,7 +110,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification msg={noti} />
+      <Notification msg={notiMsg} notiIsError={notiIsError} />
       <PersonFilter
         newFilter={newFilter}
         handleFilterChange={handleFilterChange}
