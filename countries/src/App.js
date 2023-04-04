@@ -4,9 +4,12 @@ import countriesService from "./services/countries";
 
 function App() {
   const [newSearch, setNewSearch] = useState("");
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    console.log(countriesService.getAll());
+    countriesService
+      .getAll()
+      .then((allCountries) => setCountries(allCountries));
   }, []);
 
   const handleNewSearch = (e) => {
