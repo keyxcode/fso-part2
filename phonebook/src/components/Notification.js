@@ -9,12 +9,9 @@ const Notification = ({ msg, notiIsError }) => {
   };
 
   const errorStyle = {
+    ...notiStyle,
     color: "red",
-    backgroundColor: "lightGrey",
     border: "5px solid red",
-    borderRadius: 5,
-    padding: 10,
-    marginBottom: 20,
   };
 
   if (msg === null) return null;
