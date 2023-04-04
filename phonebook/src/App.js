@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PersonFilter from "./components/PersonFilter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 import personsService from "./services/persons";
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
+  const [noti, setNoti] = useState(null);
 
   useEffect(() => {
     personsService
@@ -54,6 +56,7 @@ const App = () => {
       name: newName,
       number: newNumber,
     };
+
     if (personExists(personObject)) {
       if (
         window.confirm(
@@ -79,6 +82,10 @@ const App = () => {
       setNewName("");
       setNewNumber("");
       setNewFilter("");
+      setNoti(`Added ${personObject.name}`);
+      setTimeout(() => {
+        setNoti(null);
+      }, 5000);
     });
   };
 
@@ -92,6 +99,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification msg={noti} />
       <PersonFilter
         newFilter={newFilter}
         handleFilterChange={handleFilterChange}
