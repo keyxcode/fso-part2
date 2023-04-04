@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import Search from "./components/Search";
+import Results from "./components/Results";
 import countriesService from "./services/countries";
 
 function App() {
   const [newSearch, setNewSearch] = useState("");
   const [countries, setCountries] = useState([]);
 
-  const getNamesFromCountries = (countries) => {
-    return countries.map((country) => country["name"]["common"]);
-  };
-
-  let countriesToShow = newSearch
-    ? getNamesFromCountries(countries).filter((name) =>
-        name.toLowerCase().includes(newSearch.toLowerCase())
+  const countriesToShow = newSearch
+    ? countries.filter((country) =>
+        country["name"]["common"]
+          .toLowerCase()
+          .includes(newSearch.toLowerCase())
       )
-    : getNamesFromCountries(countries);
+    : [];
 
   useEffect(() => {
     countriesService
@@ -30,7 +29,7 @@ function App() {
     <div>
       <h1>Countries</h1>
       <Search newSearch={newSearch} handleNewSearch={handleNewSearch} />
-      <div>{countriesToShow}</div>
+      <Results countriesToShow={countriesToShow} />
     </div>
   );
 }
