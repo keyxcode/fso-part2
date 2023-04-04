@@ -14,6 +14,12 @@ function App() {
       .then((allCountries) => setCountries(allCountries));
   }, []);
 
+  const getFilteredCountries = (query) => {
+    return countries.filter((country) =>
+      country.name.common.toLowerCase().includes(query.toLowerCase())
+    );
+  };
+
   const handleNewSearch = (e) => {
     const updatedSearch = e.target.value;
     setNewSearch(updatedSearch);
@@ -21,23 +27,12 @@ function App() {
     if (updatedSearch === "") {
       setCountriesToShow([]);
     } else {
-      setCountriesToShow(
-        countries.filter((country) =>
-          country["name"]["common"]
-            .toLowerCase()
-            .includes(updatedSearch.toLowerCase())
-        )
-      );
+      setCountriesToShow(getFilteredCountries(updatedSearch));
     }
   };
 
-  const handleShowCountry = (e, countryName) => {
-    setCountriesToShow(
-      countries.filter(
-        (country) =>
-          country["name"]["common"].toLowerCase() === countryName.toLowerCase()
-      )
-    );
+  const handleShowCountry = (countryName) => {
+    setCountriesToShow(getFilteredCountries(countryName));
   };
 
   return (
