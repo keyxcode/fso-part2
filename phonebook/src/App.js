@@ -72,7 +72,16 @@ const App = () => {
                 person.id !== id ? person : returnedPerson
               )
             )
-          );
+          )
+          .catch((err) => {
+            console.log(err);
+            setNoti(
+              `Information of ${personObject.name} has already been removed from server`
+            );
+            setTimeout(() => {
+              setNoti(null);
+            }, 5000);
+          });
       }
       return;
     }
