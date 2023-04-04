@@ -6,14 +6,7 @@ import countriesService from "./services/countries";
 function App() {
   const [newSearch, setNewSearch] = useState("");
   const [countries, setCountries] = useState([]);
-
-  const countriesToShow = newSearch
-    ? countries.filter((country) =>
-        country["name"]["common"]
-          .toLowerCase()
-          .includes(newSearch.toLowerCase())
-      )
-    : [];
+  const [countriesToShow, setCountriesToShow] = useState([]);
 
   useEffect(() => {
     countriesService
@@ -22,11 +15,31 @@ function App() {
   }, []);
 
   const handleNewSearch = (e) => {
-    setNewSearch(e.target.value);
+    const updatedSearch = e.target.value;
+    setNewSearch(updatedSearch);
+
+    if (updatedSearch === "") setCountriesToShow([]);
+    else {
+      setCountriesToShow(
+        countries.filter((country) =>
+          country["name"]["common"]
+            .toLowerCase()
+            .includes(updatedSearch.toLowerCase())
+        )
+      );
+    }
   };
 
-  const handleShowCountry = () => {
-    console.log("hi");
+  const handleShowCountry = (e) => {
+    const buttonCountryName = e.target.name;
+
+    setCountriesToShow(
+      countries.filter(
+        (country) =>
+          country["name"]["common"].toLowerCase() ===
+          buttonCountryName.toLowerCase()
+      )
+    );
   };
 
   return (
