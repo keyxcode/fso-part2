@@ -1,3 +1,5 @@
+import Country from "./Country";
+
 const Results = ({ countriesToShow }) => {
   console.log(countriesToShow);
   if (countriesToShow.length > 10) {
@@ -7,7 +9,7 @@ const Results = ({ countriesToShow }) => {
       <div key={country["name"]["official"]}>{country["name"]["common"]}</div>
     ));
   }
-  return <div>{countriesToShow[0]["name"]["common"]}</div>;
+  return <Country country={countriesToShow[0]} />;
 };
 
 export default Results;
