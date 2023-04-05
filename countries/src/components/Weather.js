@@ -5,7 +5,7 @@ const Weather = ({ country }) => {
   const [weather, setWeather] = useState(null);
 
   console.log("Weather", country);
-  const capital = country["capital"][0];
+  const capital = country["capital"] ? country["capital"][0] : "";
 
   useEffect(() => {
     axios
@@ -14,7 +14,8 @@ const Weather = ({ country }) => {
       )
       .then((res) => {
         setWeather(res.data);
-      });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
