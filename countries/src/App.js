@@ -20,6 +20,12 @@ function App() {
     );
   };
 
+  const getExactCountry = (query) => {
+    return countries.filter(
+      (country) => country.name.common.toLowerCase() === query.toLowerCase()
+    );
+  };
+
   const handleNewSearch = (e) => {
     const updatedSearch = e.target.value;
     setNewSearch(updatedSearch);
@@ -32,7 +38,8 @@ function App() {
   };
 
   const handleShowCountry = (countryName) => {
-    setCountriesToShow(getFilteredCountries(countryName));
+    console.log(`Show: ${countryName}`);
+    setCountriesToShow(getExactCountry(countryName));
   };
 
   return (

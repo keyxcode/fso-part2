@@ -4,6 +4,7 @@ import axios from "axios";
 const Weather = ({ country }) => {
   const [weather, setWeather] = useState(null);
 
+  console.log("Weather", country);
   const capital = country["capital"][0];
 
   useEffect(() => {
