@@ -19,16 +19,18 @@ const Weather = ({ country }) => {
   return (
     <div>
       <h2>Weather in {capital}</h2>
-      <div>{weather ? `Temprature: ${weather.main.temp} Celcius` : ""}</div>
-      <img
-        alt={`${capital} weather-icon`}
-        src={
-          weather
-            ? `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
-            : ""
-        }
-      />
-      <div>{weather ? `Wind: ${weather.wind.speed} m/s` : ""}</div>
+      {weather ? (
+        <div>
+          <div>{`Temprature: ${weather.main.temp} Celcius`}</div>
+          <img
+            alt={`${capital} weather-icon`}
+            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+          />
+          <div>{`Wind: ${weather.wind.speed} m/s`}</div>
+        </div>
+      ) : (
+        "Loading..."
+      )}
     </div>
   );
 };
