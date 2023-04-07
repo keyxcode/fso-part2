@@ -67,13 +67,16 @@ const App = () => {
         const id = getIDFromName(newName);
         personsService
           .update(id, personObject)
-          .then((returnedPerson) =>
+          .then((returnedPerson) => {
             setPersons(
               persons.map((person) =>
                 person.id !== id ? person : returnedPerson
               )
-            )
-          )
+            );
+            setNewName("");
+            setNewNumber("");
+            setNewFilter("");
+          })
           .catch((err) => {
             console.log(err);
             setNotiIsError(true);
